@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quiz application</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" th:href="@{/}">Quiz application - game</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section id="options">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <form action="#" th:action="@{/game}" th:object="${userAnswer}" method="post">
+                    <div class="form-row">
+                        <h3 th:text="'Question ' + ${currentQuestionNumber} + '/' +${totalQuestionNumber} + ':'"></h3>
+                        <h4 th:text="${currentQuestion}"></h4>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <p>Select current answer:</p>
+                            <th:block th:each="answer,iter : ${currentQuestionAnswers}">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="answerRadioOptions"
+                                           th:id="'answer_' + ${iter.current}" th:value="${answer}"
+                                           th:field="*{answer}">
+                                    <label class="form-check-label" th:for="'answer_' + ${iter.current}"
+                                           th:text="${answer}">
+                                    </label>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <h4>Category:</h4>
+                            <th:block th:each="category : ${categories}">
+
+                            </th:block>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Next!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Contact us</h2>
+                <p class="lead">If you'd like to contact page author, feel free to <a
+                        href="mailto:ddomagala7@gmail.com">drop a line</a>!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Dariusz Domagała @ramzessoo <span
+                th:text="${#dates.year(#dates.createNow())}"></span>. Template by <a
+                href="https://startbootstrap.com/templates/scrolling-nav/">Start Bootstrap</a></p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom JavaScript for this theme -->
+<script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
